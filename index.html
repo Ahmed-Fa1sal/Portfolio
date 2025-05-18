@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Ahmed Faisal - Portfolio</title>
     <style>
         :root {
-            --primary: #4a6fa5;
-            --secondary: #166088;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --accent: #5cb85c;
+            --primary: #6e57e0;
+            --secondary: #4a4fec;
+            --accent: #00d9ff;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #f1f2f6;
+            --text: #e6e7ee;
+            --card-bg: #252941;
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --card-hover: #323459;
         }
         
         * {
@@ -19,21 +23,25 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
         
         body {
-            color: var(--dark);
-            background-color: #f5f5f5;
+            color: var(--text);
+            background-color: var(--dark);
             line-height: 1.6;
         }
         
         /* Header styles */
         header {
-            background: var(--gradient);
+            background: var(--card-bg); /* Changed to match projects section */
             color: white;
-            padding: 2rem 0;
+            height: 100vh; /* Make hero section full viewport height */
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
@@ -47,14 +55,32 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background-color: rgba(37, 41, 65, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: white;
+            color: var(--accent);
             text-decoration: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .nav-links {
@@ -63,92 +89,134 @@
         }
         
         .nav-link {
-            color: white;
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+            padding: 0.3rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
         }
         
         .nav-link:hover {
-            color: #e0e0e0;
+            color: var(--accent);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
         }
         
         .hero {
-            padding: 4rem 0;
+            flex: 1;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 3rem;
+            text-align: center;
+            padding-top: 60px; /* Account for fixed navbar */
         }
         
         .hero-content {
-            flex: 1;
-        }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 5px solid white;
-        }
-        
-        .avatar-placeholder {
-            width: 300px;
-            height: 300px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            margin: 0 auto;
+            max-width: 800px;
         }
         
         h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .tagline {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .social-links {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
+            justify-content: center;
         }
         
         .social-link {
-            background-color: white;
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
+            background-color: var(--card-bg);
+            color: var(--accent);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
             transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 1.2rem;
         }
         
         .social-link:hover {
             transform: translateY(-3px);
-            background-color: var(--accent);
+            background-color: var(--primary);
             color: white;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--accent);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
         }
         
         /* Section styles */
         section {
-            padding: 5rem 0;
+            padding: 6rem 0;
+        }
+        
+        .bg-alt {
+            background-color: var(--darker);
         }
         
         .section-title {
@@ -156,6 +224,7 @@
             margin-bottom: 3rem;
             font-size: 2.5rem;
             position: relative;
+            color: var(--accent);
         }
         
         .section-title::after {
@@ -165,6 +234,7 @@
             height: 4px;
             background: var(--gradient);
             margin: 0.5rem auto;
+            border-radius: 2px;
         }
         
         /* About section */
@@ -188,7 +258,7 @@
             text-align: center;
             font-size: 1.8rem;
             margin-bottom: 2rem;
-            color: var(--secondary);
+            color: var(--text);
         }
         
         .skills-grid {
@@ -199,50 +269,80 @@
         }
         
         .skill-card {
-            background: var(--gradient);
-            color: white;
+            background: var(--card-bg);
+            color: var(--text);
             padding: 1.2rem 1rem;
             border-radius: 8px;
             text-align: center;
             font-weight: 500;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .skill-card i {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
         }
         
         .skill-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            background-color: var(--card-hover);
         }
         
         /* Projects section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
         
         .project-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
         
         .project-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            background-color: var(--card-hover);
         }
         
         .project-image {
             height: 200px;
-            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
         }
         
         .project-content {
             padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
         }
         
         .project-tags {
@@ -253,11 +353,12 @@
         }
         
         .project-tag {
-            background-color: #f0f0f0;
-            color: var(--dark);
+            background-color: rgba(110, 87, 224, 0.15);
+            color: var(--accent);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
+            border: 1px solid rgba(110, 87, 224, 0.3);
         }
         
         .project-links {
@@ -273,25 +374,34 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 0.9rem;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .project-link i {
+            margin-right: 0.5rem;
         }
         
         .project-link:hover {
             background-color: var(--secondary);
+            transform: translateY(-2px);
         }
         
         .experience-card {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             padding: 2rem;
             margin: 0 auto;
             max-width: 800px;
-            transition: transform 0.3s;
+            transition: transform 0.3s, background-color 0.3s;
+            border-left: 4px solid var(--accent);
         }
         
         .experience-card:hover {
             transform: translateY(-5px);
+            background-color: var(--card-hover);
         }
         
         .experience-header {
@@ -299,32 +409,41 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
         
         .experience-title {
             margin-bottom: 0.5rem;
+            color: var(--accent);
         }
         
         .experience-date {
             color: var(--primary);
             font-weight: bold;
+            background-color: rgba(110, 87, 224, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
         }
         
         .project-publication {
             margin: 1rem 0;
-            padding: 0.5rem;
-            background-color: #f8f9fa;
-            border-left: 3px solid var(--primary);
+            padding: 0.8rem;
+            background-color: rgba(0, 217, 255, 0.1);
+            border-left: 3px solid var(--accent);
             font-size: 0.9rem;
+            border-radius: 0 4px 4px 0;
         }
         
         .project-publication a {
-            color: var(--primary);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
         }
         
         .project-publication a:hover {
+            color: var(--primary);
             text-decoration: underline;
         }
         
@@ -338,19 +457,24 @@
             font-size: 1rem;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            width: auto;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
+            background-color: var(--darker);
+            color: var(--text);
             padding: 2rem 0;
             text-align: center;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
         }
         
         .footer-links {
@@ -361,7 +485,7 @@
         }
         
         .footer-link {
-            color: white;
+            color: var(--text);
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -378,18 +502,21 @@
         
         /* Responsive styles */
         @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
+            h1 {
+                font-size: 3.5rem;
             }
             
-            .avatar-placeholder {
-                width: 250px;
-                height: 250px;
+            .tagline {
+                font-size: 1.8rem;
             }
             
             .skills-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
         
@@ -399,11 +526,11 @@
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .tagline {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
             
             .section-title {
@@ -418,43 +545,56 @@
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Ahmed Faisal</a>
-                <div class="nav-links">
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#experience" class="nav-link">Experience</a>
-                </div>
-            </nav>
-            
-            <div class="hero">
-                <div class="hero-content">
-                    <h1>Ahmed Faisal</h1>
-                    <p class="tagline">Full Stack Developer</p>
-                    <p>I build modern web applications with a focus on clean code and exceptional user experiences.</p>
-                    
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/ahmed-faisal-b10900317/" class="social-link" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://github.com/Ahmed-Fa1sal" class="social-link" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
+    <!-- Fixed Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Ahmed Faisal</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Full Page Hero Section -->
+    <header id="home">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Ahmed Faisal</h1>
+                <p class="tagline">Full Stack Developer</p>
+                <p class="hero-description">I build modern web applications with a focus on clean code and exceptional user experiences.</p>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/ahmed-faisal-b10900317/" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/Ahmed-Fa1sal" class="social-link" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="Ahmed-Faisal-CV.pdf" download="Ahmed-Faisal-CV" class="btn" style="margin-left: 1rem;">Download CV</a>
                 </div>
             </div>
         </div>
+        <a href="#about" class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </header>
     
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="bg-alt">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             
@@ -467,22 +607,23 @@
                 
                 <h3 class="skills-heading">Technical Skills</h3>
                 <div class="skills-grid">
-                    <div class="skill-card">Angular</div>
-                    <div class="skill-card">.NET</div>
-                    <div class="skill-card">SQL</div>
-                    <div class="skill-card">TypeScript</div>
-                    <div class="skill-card">HTML/CSS</div>
-                    <div class="skill-card">Tailwind CSS</div>
-                    <div class="skill-card">Java</div>
-                    <div class="skill-card">C#</div>
-                    <div class="skill-card">Python</div>
+                    <div class="skill-card"><i class="fab fa-angular"></i> Angular</div>
+                    <div class="skill-card"><i class="fab fa-windows"></i> .NET</div>
+                    <div class="skill-card"><i class="fas fa-database"></i> SQL</div>
+                    <div class="skill-card"><i class="fab fa-js"></i> TypeScript</div>
+                    <div class="skill-card"><i class="fab fa-html5"></i> HTML/CSS</div>
+                    <div class="skill-card"><i class="fab fa-css3-alt"></i> Tailwind CSS</div>
+                    <div class="skill-card"><i class="fab fa-java"></i> Java</div>
+                    <div class="skill-card"><i class="fab fa-microsoft"></i> C#</div>
+                    <div class="skill-card"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill-card"><i class="fab fa-git-alt"></i> Git</div>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- Projects Section -->
-    <section id="projects" style="background-color: #f8f9fa;">
+    <section id="projects">
         <div class="container">
             <h2 class="section-title">My Projects</h2>
             
@@ -490,7 +631,7 @@
                 <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-image">
-                        <i class="fas fa-sign-language" style="font-size: 3rem; color: #ccc;"></i>
+                        <img src="project1.png" alt="Arabic Sign Language Recognition Project">
                     </div>
                     <div class="project-content">
                         <h3>Real-Time Arabic Sign Language Recognition</h3>
@@ -506,8 +647,8 @@
                             <span class="project-tag">LSTM</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://www.mdpi.com/1424-8220/24/11/3683" class="project-link" target="_blank">Publication</a>
-                            <a href="https://github.com/Ahmed-Fa1sal/GraudationProject" class="project-link" target="_blank">GitHub</a>
+                            <a href="https://www.mdpi.com/1424-8220/24/11/3683" class="project-link" target="_blank"><i class="fas fa-book"></i> Publication</a>
+                            <a href="https://github.com/Ahmed-Fa1sal/GraudationProject" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -515,7 +656,7 @@
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-image">
-                        <i class="fas fa-city" style="font-size: 3rem; color: #ccc;"></i>
+                        <img src="project2.png" alt="Madinah Hub Project">
                     </div>
                     <div class="project-content">
                         <h3>Madinah Hub</h3>
@@ -525,10 +666,11 @@
                             <span class="project-tag">.NET</span>
                             <span class="project-tag">Firebase</span>
                             <span class="project-tag">Tailwind CSS</span>
+                            <span class="project-tag">SignalR</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://medinahub-v1.web.app/" class="project-link" target="_blank">Live Demo</a>
-                            <a href="https://github.com/RazanXCode/MadinahHub" class="project-link" target="_blank">GitHub</a>
+                            <a href="https://medinahub-v1.web.app/" class="project-link" target="_blank"><i class="fas fa-globe"></i> Live Demo</a>
+                            <a href="https://github.com/RazanXCode/MadinahHub" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -537,7 +679,7 @@
     </section>
     
     <!-- Experience Section -->
-    <section id="experience">
+    <section id="experience" class="bg-alt">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             
@@ -564,7 +706,7 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="#" class="footer-link">Home</a>
+                <a href="#home" class="footer-link">Home</a>
                 <a href="#about" class="footer-link">About</a>
                 <a href="#projects" class="footer-link">Projects</a>
                 <a href="#experience" class="footer-link">Experience</a>
@@ -600,7 +742,7 @@
         
         // Add active class to nav links on scroll
         window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('section, header');
             const navLinks = document.querySelectorAll('.nav-link');
             
             let current = '';
