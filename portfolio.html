@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --accent: #5cb85c;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #e0e0e0;
+        }
+        
+        .hero {
+            padding: 4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 5px solid white;
+        }
+        
+        .avatar-placeholder {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            background-color: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 0.5rem auto;
+        }
+        
+        /* About section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        .skills-heading {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-card {
+            background: var(--gradient);
+            color: white;
+            padding: 1.2rem 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Projects section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .project-tag {
+            background-color: #f0f0f0;
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .project-link {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary);
+        }
+        
+        .experience-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 800px;
+            transition: transform 0.3s;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .experience-title {
+            margin-bottom: 0.5rem;
+        }
+        
+        .experience-date {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .project-publication {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-left: 3px solid var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .project-publication a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .project-publication a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .avatar-placeholder {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Ahmed Faisal</a>
+                <div class="nav-links">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                </div>
+            </nav>
+            
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Ahmed Faisal</h1>
+                    <p class="tagline">Full Stack Developer</p>
+                    <p>I build modern web applications with a focus on clean code and exceptional user experiences.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ahmed-faisal-b10900317/" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/Ahmed-Fa1sal" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! I'm a Computer Science graduate focusing on web development and Artificial Intelligence. With a passion for creating responsive and intuitive applications, I strive to write clean code that solves real-world problems.</p>
+                    <p>I have a strong foundation in modern frameworks and technologies like Angular and .NET, complemented by frontend design skills with Tailwind CSS. My academic background has equipped me with solid problem-solving abilities and a deep understanding of software engineering principles.</p>
+                    <p>I'm enthusiastic about continuous learning and staying updated with emerging technologies in both web development and AI. I'm looking to leverage my skills to contribute to innovative projects that make a positive impact.</p>
+                </div>
+                
+                <h3 class="skills-heading">Technical Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">Angular</div>
+                    <div class="skill-card">.NET</div>
+                    <div class="skill-card">SQL</div>
+                    <div class="skill-card">TypeScript</div>
+                    <div class="skill-card">HTML/CSS</div>
+                    <div class="skill-card">Tailwind CSS</div>
+                    <div class="skill-card">Java</div>
+                    <div class="skill-card">C#</div>
+                    <div class="skill-card">Python</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-sign-language" style="font-size: 3rem; color: #ccc;"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Real-Time Arabic Sign Language Recognition</h3>
+                        <p>A hybrid deep learning model for recognizing Arabic Sign Language (ArSL), combining CNN and LSTM to capture spatial and temporal features. Achieved 94.40% accuracy with CNN and 82.70% with LSTM.</p>
+                        <div class="project-publication">
+                            <p><strong>Publication Date:</strong> June 6, 2024</p>
+                            <p><strong>Publication Link:</strong> <a href="https://www.mdpi.com/1424-8220/24/11/3683" target="_blank">MDPI Sensors</a></p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Deep Learning</span>
+                            <span class="project-tag">CNN</span>
+                            <span class="project-tag">LSTM</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.mdpi.com/1424-8220/24/11/3683" class="project-link" target="_blank">Publication</a>
+                            <a href="https://github.com/Ahmed-Fa1sal/GraudationProject" class="project-link" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-city" style="font-size: 3rem; color: #ccc;"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Madinah Hub</h3>
+                        <p>A web-based platform connecting visitors and local residents with communities, events, and discussions in Madinah. Enhances visitor and local experiences by providing an easy way to engage and stay informed about city events.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Angular</span>
+                            <span class="project-tag">.NET</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">Tailwind CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://medinahub-v1.web.app/" class="project-link" target="_blank">Live Demo</a>
+                            <a href="https://github.com/RazanXCode/MadinahHub" class="project-link" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Full Stack Developer Bootcamp</h3>
+                        <p><strong>Elm Company</strong></p>
+                    </div>
+                    <p class="experience-date">February 2025 - May 2025</p>
+                </div>
+                <ul>
+                    <li>Completed an intensive 3-month bootcamp for full stack developers</li>
+                    <li>Developed responsive web applications using Angular for frontend</li>
+                    <li>Built robust backend services with .NET framework</li>
+                    <li>Collaborated in team projects using agile methodologies</li>
+                    <li>Implemented modern design patterns with Tailwind CSS</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Home</a>
+                <a href="#about" class="footer-link">About</a>
+                <a href="#projects" class="footer-link">Projects</a>
+                <a href="#experience" class="footer-link">Experience</a>
+            </div>
+            
+            <div class="social-links" style="justify-content: center;">
+                <a href="https://www.linkedin.com/in/ahmed-faisal-b10900317/" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Ahmed-Fa1sal" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            
+            <p class="copyright">&copy; 2025 Ahmed Faisal. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add active class to nav links on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
